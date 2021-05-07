@@ -1,19 +1,14 @@
 import * as React from 'react';
 import { Button } from '@material-ui/core';
 
-export default function UserMenu(props: { menu: string }) {
-    let menu;
-    switch (props.menu) {
-        case 'pause':
-            menu = <Button variant="contained" color="primary">Pause</Button>;
-            break;
-        case 'popup':
-            menu = <Button variant="contained" color="primary">popup</Button>;
-            break;
-        case 'start':
-        default:
-            menu = <Button variant="contained" color="secondary">Play!</Button>;
-            break;
-    }
-    return (menu);
+export default function UserMenu(props: { menu: string, handleMenuChange: (menu: string) => void }): JSX.Element {
+    const { menu, handleMenuChange } = props;
+    return (
+        <div>
+            {menu === 'START' && <Button variant="contained" color="secondary" onClick={() => handleMenuChange('PLAY')} >Play!</ Button>}
+            {menu === 'TOP' && <Button variant="contained" color="primary" onClick={() => handleMenuChange('PAUSE')}>Pause game</Button>}
+            {menu === 'PAUSE' && <Button variant="contained" color="primary" onClick={() => handleMenuChange('PLAY')}>Resume</Button>}
+            {menu === 'PAUSE' && <Button variant="contained" color="secondary" onClick={() => handleMenuChange('QUIT')}>Quit</Button>}
+        </div>
+    )
 }

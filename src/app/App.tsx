@@ -1,21 +1,36 @@
 import React from 'react';
 import './App.css';
 import UserMenu from './components/UserMenu'
+import GameBoard from './components/GameBoard'
 import { useSelector, useDispatch } from 'react-redux'
-import { increment, decrement, login } from '../actions'
+import { changeMenu, initBoard, deleteBoard } from '../actions'
 
-function App() {
-  const counter = useSelector((state: { counter: number }) => state.counter);
-  const isLogged = useSelector((state: { isLogged: boolean }) => state.isLogged);
+interface state {
+  counter: number,
+  menuState: string,
+  gameBoard: boardData,
+}
+
+function App(): JSX.Element {
+  // const counter = useSelector((state: state) => state.counter);
+  const menu = useSelector((state: state) => state.menuState);
+  const gameBoard = useSelector((state: state) => state.gameBoard);
   const dispatch = useDispatch();
+  const handleMenuChange = (menuIntent: string) => {
+    if (menuIntent === 'PLAY' && gameBoard.length === 1 && gameBoard[0].length === 0) {
+      dispatch(initBoard())
+    }
+    if (menuIntent === 'QUIT') {
+      dispatch(deleteBoard())
+    }
+    dispatch(changeMenu(menuIntent))
+  }
+
 
   return (
     <div className="App">
-      <h1>Counter {counter}</h1>
-      <button onClick={() => dispatch(increment(4))}>+</button>
-      <button onClick={() => dispatch(decrement())}>-</button>
-      {isLogged ? <h2>Logged in!!!</h2> : <button onClick={() => dispatch(login())}>Login</button>}
-      <UserMenu menu='start' />
+      <UserMenu menu={menu} handleMenuChange={handleMenuChange} />
+      <GameBoard board={gameBoard} />
     </div>
   );
 }

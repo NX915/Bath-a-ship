@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import counter from './counter';
-import isLogged from './isLogged';
+import menuState from './menuState';
+import gameBoard from './gameBoard';
 
 const allReducer = combineReducers({
     counter,
-    isLogged
+    menuState,
+    gameBoard,
 })
 
 export default allReducer;

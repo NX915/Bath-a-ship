@@ -1,12 +1,13 @@
-const menuReducer = (state = 'START', action: { type: string }): string => {
+const menuReducer = (state = { menu: 'START' }, action: { type: string }): menuState => {
     switch (action.type) {
         case 'PAUSE':
-            return 'PAUSE';
+            return { menu: 'PAUSE' };
         case 'PLAY':
-            return 'TOP';
+            return { menu: 'TOP' };
         case 'QUIT':
+            return { menu: 'START' };
         default:
-            return 'START';
+            return { ...state };
     }
 }
 

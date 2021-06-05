@@ -13,8 +13,8 @@ function App(): JSX.Element {
   const handleMenuChange = (menuIntent: string) => {
     if (
       menuIntent === "PLAY" &&
-      gameBoard.length === 1 &&
-      gameBoard[0].length === 0
+      gameBoard.tiles.length === 1 &&
+      gameBoard.tiles[0].length === 0
     ) {
       dispatch(initBoard());
     }

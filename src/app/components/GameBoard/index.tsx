@@ -29,13 +29,14 @@ const CellStyle = styled.li`
   &:hover {
     cursor: none;
     filter: brightness(1.8);
+    transform: scale(1.3);
   }
 `;
 
 export default function GameBoard(): JSX.Element {
   const gameBoard = useSelector((state: state) => state.gameBoard);
   const dispatch = useDispatch();
-  const rows = gameBoard.map((row, yCoord) => (
+  const rows = gameBoard.tiles.map((row, yCoord) => (
     <li key={yCoord}>
       <ColStyle>
         {row.map((col, xCoord) => (

@@ -5,7 +5,18 @@ type tileData = {
     shipId: string | null,
     coord: coordType,
 };
-type boardData = (tileData[])[];
+type shipData = {
+    id: string,
+    type: 'dd' | 'ca' | 'bb' | 'cv' | 'ss',
+    position: coordType,
+    orientation: 'v' | 'h',
+    sunk: boolean,
+}
+type boardData = {
+    ships?: shipData,
+    tiles: (tileData[])[]
+}
+
 
 type menuState = { menu: string };
 
